@@ -16,6 +16,7 @@
 #include <string.h>
 
 int  erros = 0;   /* quantos erros ja foram encontrados (lexicos+estruturais) */
+int  num_tokens = 0;   /* quantos tokens ja foram encontrados */
 
 /* --------------------------------------------------------------------------
    AUTOMATO DA GRAMATICA DE DECLARACOES
@@ -81,6 +82,7 @@ ID      {LETRA}({LETRA}|{DIGITO})*
     /* PALAVRA RESERVADA (tipo). Vem ANTES da regra do identificador: como
        'int' casa com os dois padroes, a ordem resolve o empate a favor do tipo. */
     printf("%-15s %s\n", "TIPO", yytext);
+    num_tokens++;
     if (estado != ESPERA_TIPO)
         erro("tipo inesperado -- a declaracao anterior nao terminou com ';'");
     strncpy(tipo_atual, yytext, 15); tipo_atual[15] = '\0';
@@ -91,6 +93,7 @@ ID      {LETRA}({LETRA}|{DIGITO})*
     /* IDENTIFICADOR (nome de variavel). A acao consulta o automato para saber
        se o nome apareceu no lugar certo da declaracao. */
     printf("%-15s %s\n", "IDENTIFICADOR", yytext);
+    num_tokens++;
     if (estado == ESPERA_ID) {
         insere(yytext, tipo_atual);     /* nome no lugar certo: anota         */
         estado = ESPERA_VIRG_PVIRG;
@@ -136,6 +139,7 @@ ID      {LETRA}({LETRA}|{DIGITO})*
 ","   {
     /* VIRGULA: separa nomes numa lista (int a, b, c;). */
     printf("%-15s %s\n", "VIRGULA", yytext);
+    num_tokens++;
     if (estado == ESPERA_VIRG_PVIRG)
         estado = ESPERA_ID;             /* apos a virgula, vem outro nome     */
     else
@@ -145,6 +149,7 @@ ID      {LETRA}({LETRA}|{DIGITO})*
 ";"   {
     /* PONTO E VIRGULA: encerra a declaracao. */
     printf("%-15s %s\n", "PONTO_VIRGULA", yytext);
+    num_tokens++;
     if (estado == ESPERA_VIRG_PVIRG)
         estado = ESPERA_TIPO;           /* fechou; pronto p/ proxima declaracao */
     else {
@@ -194,7 +199,8 @@ int main(int argc, char **argv) {
     }
 
     printf("\n===== RESUMO =====\n");
-    printf("Erros encontrados: %d\n", erros);
+    printf("Tokens encontrados: %d\n", num_tokens);
+    printf("Erros encontrados: %d\n\n", erros);
     printf("%s\n", erros == 0 ? ">> PROGRAMA VALIDO" : ">> PROGRAMA INVALIDO");
 
     for (int i = 0; i < n_simb; i++) {
