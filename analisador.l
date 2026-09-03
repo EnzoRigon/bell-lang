@@ -43,6 +43,11 @@ typedef struct Token {
 
 Token tabela[MAX] = {0};
 
+void libera(Token token) {
+    free(token.nome);
+    free(token.tipo);
+}
+
 /* Anota uma variavel (nome + tipo) na tabela de simbolos. */
 void insere(char *nome, char *tipo) {
     if (n_simb < MAX) {
@@ -191,5 +196,10 @@ int main(int argc, char **argv) {
     printf("\n===== RESUMO =====\n");
     printf("Erros encontrados: %d\n", erros);
     printf("%s\n", erros == 0 ? ">> PROGRAMA VALIDO" : ">> PROGRAMA INVALIDO");
+
+    for (int i = 0; i < n_simb; i++) {
+        libera(tabela[i]);
+    }
+
     return 0;
 }
