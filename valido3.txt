@@ -1,0 +1,3 @@
+float _;
+int x1, y2, z3;
+char aB, OUTRA;

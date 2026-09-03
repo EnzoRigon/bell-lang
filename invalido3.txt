@@ -1,0 +1,2 @@
+double z;
+int a b;

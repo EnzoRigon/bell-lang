@@ -1,0 +1,3 @@
+int a;
+float x, y, z;
+char nome;
