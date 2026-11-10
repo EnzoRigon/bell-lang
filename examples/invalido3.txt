@@ -1,0 +1,6 @@
+// Teste Invalido 3 (Sintatico): Erros estruturais na gramatica (falta de ';', expressao incompleta)
+int a, b;
+
+a = 10 + * 5;
+b = 20
+a = b + 1;

@@ -1,0 +1,8 @@
+// Teste Invalido 1 (Semantico): Variavel usada sem declarar e redeclaracao de variavel
+int contador, limite;
+float taxa;
+int contador;
+
+limite = 10;
+total = limite + 5;
+taxa = desconto * 2.0;

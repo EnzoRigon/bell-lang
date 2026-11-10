@@ -1,0 +1,6 @@
+// Teste Invalido 4 (Lexico + Semantico): Identificador com digito inicial e caractere invalido
+int 2contador;
+float valor;
+
+valor = 10.5 @ 2.0;
+valor = 10;

@@ -1,2 +1,6 @@
 analisador
 lex.yy.c
+analisador.tab.c
+analisador.tab.h
+*.o
+*.output

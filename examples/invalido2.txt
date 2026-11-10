@@ -1,0 +1,17 @@
+// Teste Invalido 2 (Semantico): Violacoes de tipagem estrita em expressoes, atribuicoes, if e switch
+int inteiro;
+float real;
+
+inteiro = 10 + 2.5;
+inteiro = 3.14;
+real = 42;
+
+if (inteiro >= 5.5) {
+    inteiro = 1;
+}
+
+switch (real) {
+    case 1:
+        inteiro = 0;
+        break;
+}

@@ -1,0 +1,20 @@
+// Teste Valido 1: Equivalente ao exemplo do enunciado (declaracoes, expressao, if/else e switch)
+int limite, faixa;
+float media;
+
+limite = 10 + 5 * 2;
+faixa = 1;
+
+if (limite > 20) {
+    media = 10.0 / 2.0;
+} else {
+    media = 0.0;
+}
+
+switch (faixa) {
+    case 1:
+        limite = limite + 1;
+        break;
+    default:
+        limite = 0;
+}

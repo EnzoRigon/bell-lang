@@ -1,0 +1,23 @@
+// Teste Valido 4: Comando switch com casos unitarios, multiplos e caso padrao
+int opcao, pontos, bonus;
+
+opcao = 2;
+pontos = 10;
+bonus = 0;
+
+switch (opcao + 1) {
+    case 1:
+        bonus = 5;
+        break;
+    case 2, 3:
+        bonus = 10;
+        pontos = pontos + bonus;
+        break;
+    case 4:
+    case 5:
+        bonus = 20;
+        break;
+    default:
+        bonus = 1;
+        break;
+}

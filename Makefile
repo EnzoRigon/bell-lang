@@ -1,31 +1,36 @@
-# Compiler and tool definitions
-CC = gcc
-LEX = flex
+# ==========================================================================
+# Makefile -- Compilador bell (Flex + Bison + Semantico em C)
+# Trabalho do Grau B -- Compiladores -- UNISINOS
+# ==========================================================================
 
-# Compiler flags (-Wall enables warnings, -g adds debugging symbols)
-CFLAGS = -Wall -g
+CC     = gcc
+LEX    = flex
+YACC   = bison
 
-# Libraries (-lfl links the Flex library for standard yywrap)
-LIBS = -lfl
+CFLAGS = -Wall -Wextra -g
 
-# Name of your final executable output
-TARGET = analisador 
-
-# Name of your source files
+TARGET   = analisador
 FLEX_SRC = analisador.l
-GEN_C = lex.yy.c
+YACC_SRC = analisador.y
+SEM_SRC  = semantico.c
 
-# Default rule executed when typing 'make'
+LEX_C    = lex.yy.c
+YACC_C   = analisador.tab.c
+YACC_H   = analisador.tab.h
+
 all: $(TARGET)
 
-# Rule to build the final executable
-$(TARGET): $(GEN_C)
-	$(CC) $(CFLAGS) -o $(TARGET) $(GEN_C) $(LIBS)
+# Passo 3: Compila tudo junto (Bison + Flex + Modulo Semantico)
+$(TARGET): $(YACC_C) $(LEX_C) $(SEM_SRC) semantico.h
+	$(CC) $(CFLAGS) -o $(TARGET) $(YACC_C) $(LEX_C) $(SEM_SRC)
 
-# Rule to generate the C source code from the Flex file
-$(GEN_C): $(FLEX_SRC)
+# Passo 1: Bison gera analisador.tab.c e analisador.tab.h (flag -d)
+$(YACC_C) $(YACC_H): $(YACC_SRC) semantico.h
+	$(YACC) -d $(YACC_SRC)
+
+# Passo 2: Flex gera lex.yy.c (precisa de analisador.tab.h pronto)
+$(LEX_C): $(FLEX_SRC) $(YACC_H) semantico.h
 	$(LEX) $(FLEX_SRC)
 
-# Clean rule to delete generated files and start fresh
 clean:
-	rm -f $(TARGET) $(GEN_C) *.o
+	rm -f $(TARGET) $(LEX_C) $(YACC_C) $(YACC_H) *.o

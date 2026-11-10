@@ -1,0 +1,11 @@
+// Teste Valido 2: Precedencia de operadores e parenteses na Notacao Pos-Fixada (RPN)
+int a, b, c;
+float x, y, resultado;
+
+a = 10 + 5 * 2;
+b = (10 + 5) * 2;
+c = (a - b) / 2 + 1;
+
+x = 2.5;
+y = 1.5;
+resultado = (x + y) * 3.0 - 1.0 / 2.0;

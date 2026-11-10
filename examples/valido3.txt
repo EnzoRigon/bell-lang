@@ -1,0 +1,27 @@
+// Teste Valido 3: Todos os 6 operadores relacionais (==, !=, >, <, >=, <=) e if sem/com else
+int nota, frequencia, aprovado;
+float media, minimo;
+
+nota = 8;
+frequencia = 85;
+aprovado = 0;
+media = 7.5;
+minimo = 6.0;
+
+if (nota == 10) {
+    aprovado = 1;
+}
+
+if (nota != 0) {
+    if (frequencia >= 75) {
+        aprovado = 1;
+    }
+}
+
+if (media < minimo) {
+    aprovado = 0;
+} else {
+    if (media <= 10.0) {
+        aprovado = 1;
+    }
+}

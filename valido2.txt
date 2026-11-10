@@ -1,2 +1,0 @@
-int _contador, total2;
-char c;
