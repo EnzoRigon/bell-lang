@@ -5,3 +5,4 @@ analisador.tab.c
 analisador.tab.h
 *.o
 *.output
+Enunciado.pdf
