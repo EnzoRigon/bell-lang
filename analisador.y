@@ -28,6 +28,7 @@ extern char *yytext;
 extern FILE *yyin;
 extern int erros_lexicos;
 extern int num_tokens;
+extern int listar_tokens;
 
 /* Contador de erros sintaticos (estruturais) */
 int erros_sintaticos = 0;
@@ -299,6 +300,29 @@ void yyerror(const char *msg) {
    FUNCAO PRINCIPAL
    -------------------------------------------------------------------------- */
 int main(int argc, char **argv) {
+    /* Modo de inspecao lexica (--tokens): imprime linha, colunas e categoria
+       de cada token reconhecido pelo analisador lexico. */
+    if (argc > 1 && strcmp(argv[1], "--tokens") == 0) {
+        listar_tokens = 1;
+        if (argc > 2) {
+            yyin = fopen(argv[2], "r");
+            if (!yyin) {
+                perror("Erro ao abrir arquivo");
+                return 1;
+            }
+        }
+        int tok;
+        while ((tok = yylex()) != 0) {
+            if (tok == T_ID || tok == T_NUM_INT || tok == T_NUM_FLOAT) {
+                free(yylval.texto);
+            }
+        }
+        if (argc > 2 && yyin) {
+            fclose(yyin);
+        }
+        return 0;
+    }
+
     if (argc > 1) {
         yyin = fopen(argv[1], "r");
         if (!yyin) {

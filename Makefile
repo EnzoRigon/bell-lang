@@ -9,7 +9,7 @@ YACC   = bison
 
 CFLAGS = -Wall -Wextra -g
 
-TARGET   = analisador
+TARGET   = bellc
 FLEX_SRC = analisador.l
 YACC_SRC = analisador.y
 SEM_SRC  = semantico.c
