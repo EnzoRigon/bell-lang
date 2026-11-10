@@ -19,3 +19,7 @@ make
 ./bellc examples/invalido1.bell
 ./bellc examples/invalido2.bell
 ```
+
+## Extra
+
+- [bell.nvim](https://github.com/gabrielmusskopf/bell.nvim): Plugin para aplicar syntax highlighting em código-fonte `.bell` para NeoVim
